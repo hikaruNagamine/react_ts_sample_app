@@ -6,7 +6,11 @@ services:
       - NODE_ENV=development
     volumes:
       - ./:/usr/src/app
-    command: sh -c 'cd react-app && yarn start'
+      - ./entrypoint.sh:/entrypoint.sh:ro
+    # entrypoint: bash -c ./entrypoint.sh
+    env_file:
+      - ./.env
+    command: bash -c 'cd app && yarn start'
     ports:
-      - 8000:3000
-    tty: true
+      - "3000:3000"
+    tty: True
